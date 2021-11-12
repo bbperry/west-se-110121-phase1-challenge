@@ -25,8 +25,21 @@ function renderGram(gram) {
     e.target.reset();
   });
 
+
+
+
   likeBtn.addEventListener("click", () => {
     ++gram.likes;
     likesNum.textContent = `${gram.likes} likes`;
   });
 }
+
+fetch("http://localhost:3000/comments")
+  .then((resp) => resp.json())
+  .then((data) => data.forEach(renderComments));
+
+  function renderComments(comm) {
+      const oldComment = document.createElement('li')
+        oldComment.innerText = comm.content
+        commentList.appendChild(oldComment)
+  }
